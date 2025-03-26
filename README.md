@@ -1,38 +1,22 @@
-# sv
+# Svelte Todo-List
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+A simple todo list made with Svelte 5 to learn the basics of Svelte.
 
-## Creating a project
+## Run locally
 
-If you're seeing this, you've probably already done this step. Congrats!
+Download this repository.
 
+In a terminal, navigate to the directory:
 ```bash
-# create a new project in the current directory
-npx sv create
-
-# create a new project in my-app
-npx sv create my-app
+cd path/to/this/repository
 ```
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
+Install dependencies:
 ```bash
-npm run dev
+npm install
+```
 
-# or start the server and open the app in a new browser tab
+Run in developer mode:
+```bash
 npm run dev -- --open
 ```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
