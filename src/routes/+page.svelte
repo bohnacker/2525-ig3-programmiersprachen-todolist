@@ -18,12 +18,17 @@
 			completed: false
 		}
 	]);
-	// get highest id in the list
+	// get highest id in the list to use as nextId
 	let nextId = Math.max(...todoList.map((todo) => todo.id)) + 1;
 	// if list is empty, set nextId to 1
 	if (isNaN(nextId)) {
 		nextId = 1;
 	}
+
+	$inspect(todoList);
+
+	let openTodos = $derived(todoList.filter((todo) => !todo.completed));
+	let completedTodos = $derived(todoList.filter((todo) => todo.completed));
 
 	let inputField;
 	let inputValue = $state('');
@@ -46,6 +51,10 @@
 			addItem();
 		}
 	}
+
+	function deleteItem(id) {
+		todoList = todoList.filter((todo) => todo.id !== id);
+	}
 </script>
 
 <div class="header">
@@ -60,11 +69,21 @@
 	<button onclick={addItem} id="add-button" disabled={inputValue === ''}>Add</button>
 </div>
 
-<div class="todo-list">
-	{#each todoList as todo, i}
-		<TodoItem {...todo} />
-	{/each}
-</div>
+{#if openTodos.length > 0}
+	<div class="todo-list open">
+		{#each openTodos as todo, i (todo.id)}
+			<TodoItem id={todo.id} title={todo.title} bind:completed={todo.completed} {deleteItem}/>
+		{/each}
+	</div>
+{/if}
+
+{#if completedTodos.length > 0}
+	<div class="todo-list completed">
+		{#each completedTodos as todo, i (todo.id)}
+			<TodoItem id={todo.id} title={todo.title} bind:completed={todo.completed} {deleteItem}/>
+		{/each}
+	</div>
+{/if}
 
 <style>
 	.header {
@@ -90,6 +109,6 @@
 		border-radius: 5px;
 		overflow: hidden;
 		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+		margin-bottom: 20px;
 	}
-
 </style>
