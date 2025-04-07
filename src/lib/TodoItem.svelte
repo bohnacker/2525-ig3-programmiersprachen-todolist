@@ -1,4 +1,9 @@
 <script>
+	// import trash icon
+	import { Icon } from 'svelte-icons-pack';
+	import { OiTrash16 } from "svelte-icons-pack/oi";
+	import { FiTrash } from "svelte-icons-pack/fi"; 
+
 	let { id, title, completed = $bindable(), deleteItem } = $props();
 
 	function updateState(event) {
@@ -8,13 +13,15 @@
 </script>
 
 <div class={['todo-item', { completed }]}>
+	
 	<input type="checkbox" id="item{id}" onchange={updateState} checked={completed} />
 	<label for="item{id}">{title} ({id})</label>
 	<!-- add trash button -->
 	<button
 		class="delete-button"
-		onclick={() => {deleteItem(id)}}>Delete</button
+		onclick={() => {deleteItem(id)}}><Icon src={OiTrash16} size="16"/></button
 	>
+	
 </div>
 
 <style>
@@ -42,19 +49,21 @@
 	}
 	.delete-button {
 		margin-left: auto;
-		background: #ff0000;
-		color: white;
+		background: #ff000000;
+		color: red;
 		border: none;
-		padding: 5px 10px;
+		padding: 7px 7px;
 		border-radius: 5px;
 		cursor: pointer;
 		text-decoration: none;
 	}
 	.delete-button:hover {
-		background: #cc0000;
+		background: #ff0000;
+		color: white;
 	}
 	.delete-button:active {
-		background: #990000;
+		background: #ff0000;
+		color: white;
 	}
 	.delete-button:focus {
 		outline: none;
