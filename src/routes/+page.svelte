@@ -7,20 +7,12 @@
 		{ id: 4, title: 'Drittes Todo', completed: false }
 	]);
 	// initialize nextID to the highest id in the todoList + 1
-	let nextID = $state(
-		todoList.length > 0 ? Math.max(...todoList.map(todo => todo.id)) + 1 : 1
-	);
+	let nextID = $state(todoList.length > 0 ? Math.max(...todoList.map((todo) => todo.id)) + 1 : 1);
 
 	let inputValue = $state('');
 
-	let sortedTodoList = $derived(
-		todoList.sort((a, b) => {
-			if (a.completed === b.completed) {
-				return a.id - b.id;
-			}
-			return a.completed ? 1 : -1;
-		})
-	);
+	let openTodos = $derived(todoList.filter((todo) => !todo.completed));
+	let completedTodos = $derived(todoList.filter((todo) => todo.completed));
 
 	function addItem() {
 		if (inputValue != '') {
@@ -42,8 +34,16 @@
 	<button onclick={addItem} id="add-button" disabled={inputValue === ''}>Add</button>
 </div>
 
+Open:
 <div class="todo-list">
-	{#each sortedTodoList as todo, i}
+	{#each openTodos as todo, i (todo.id)}
+		<ListItem id={todo.id} title={todo.title} bind:completed={todo.completed} />
+	{/each}
+</div>
+
+Completed:
+<div class="todo-list">
+	{#each completedTodos as todo, i (todo.id)}
 		<ListItem id={todo.id} title={todo.title} bind:completed={todo.completed} />
 	{/each}
 </div>
