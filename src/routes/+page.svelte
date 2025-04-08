@@ -27,6 +27,10 @@
 			addItem();
 		}
 	}
+
+	function deleteItem(id) {
+		todoList = todoList.filter((todo) => todo.id !== id);
+	}
 </script>
 
 <div class="header">
@@ -37,14 +41,14 @@
 Open:
 <div class="todo-list">
 	{#each openTodos as todo, i (todo.id)}
-		<ListItem id={todo.id} title={todo.title} bind:completed={todo.completed} />
+		<ListItem id={todo.id} title={todo.title} bind:completed={todo.completed} {deleteItem}/>
 	{/each}
 </div>
 
 Completed:
 <div class="todo-list">
 	{#each completedTodos as todo, i (todo.id)}
-		<ListItem id={todo.id} title={todo.title} bind:completed={todo.completed} />
+		<ListItem id={todo.id} title={todo.title} bind:completed={todo.completed} {deleteItem}/>
 	{/each}
 </div>
 

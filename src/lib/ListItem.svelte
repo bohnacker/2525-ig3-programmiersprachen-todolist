@@ -1,21 +1,17 @@
 <script>
-	let { id, title, completed = $bindable() } = $props();
+	let { id, title, completed = $bindable(), deleteItem } = $props();
 
 	// Function to handle checkbox change
 	function checkboxChanged(event) {
 		completed = event.target.checked;
 		console.log(`Todo item ${id} updated: ${completed}`);
 	}
-
-	function deleteItem() {
-		
-	}
 </script>
 
 <div class="todo-item {completed ? 'completed' : ''}">
 	<input type="checkbox" id="item{id}" onchange={checkboxChanged} checked={completed}/>
 	<label for="item{id}">{title} ({id})</label>
-	<button onclick={deleteItem}>Delete</button>
+	<button onclick={() => deleteItem(id)}>Delete</button>
 </div>
 
 <style>
