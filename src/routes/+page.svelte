@@ -34,7 +34,7 @@
 </script>
 
 <div class="header">
-	<input onkeypress={keyPressed} id="todo-input" type="text" bind:value={inputValue} />
+	<input class="border rounded-lg p-2 w-full"onkeypress={keyPressed} id="todo-input" type="text" bind:value={inputValue} />
 	<button onclick={addItem} id="add-button" disabled={inputValue === ''}>Add</button>
 </div>
 
