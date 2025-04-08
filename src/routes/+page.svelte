@@ -66,13 +66,19 @@
 		bind:value={inputValue}
 		placeholder="Your new Todo"
 	/>
-	<button onclick={addItem} id="add-button" disabled={inputValue === ''}>Add</button>
+	<!-- use tailwind to style button -->
+	<button
+		class="bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-600 transition duration-200 ease-in-out"
+		onclick={addItem}
+		id="add-button"
+		disabled={inputValue === ''}>Add</button
+	>
 </div>
 
 {#if openTodos.length > 0}
 	<div class="todo-list open">
 		{#each openTodos as todo, i (todo.id)}
-			<TodoItem id={todo.id} title={todo.title} bind:completed={todo.completed} {deleteItem}/>
+			<TodoItem id={todo.id} title={todo.title} bind:completed={todo.completed} {deleteItem} />
 		{/each}
 	</div>
 {/if}
@@ -80,7 +86,7 @@
 {#if completedTodos.length > 0}
 	<div class="todo-list completed">
 		{#each completedTodos as todo, i (todo.id)}
-			<TodoItem id={todo.id} title={todo.title} bind:completed={todo.completed} {deleteItem}/>
+			<TodoItem id={todo.id} title={todo.title} bind:completed={todo.completed} {deleteItem} />
 		{/each}
 	</div>
 {/if}
