@@ -1,4 +1,6 @@
 <script>
+	import ListItem from '$lib/ListItem.svelte';
+
 	let todoList = $state(['Erstes Todo', 'Zweites Todo', 'Drittes Todo']);
 
 	let inputValue = $state('');
@@ -24,10 +26,7 @@
 
 <div class="todo-list">
 	{#each todoList as todo, i}
-		<div class="todo-item">
-			<input type="checkbox" id="item{i}" />
-			<label for="item{i}">{todo}</label>
-		</div>
+		<ListItem todo={todo} i={i}/>
 	{/each}
 </div>
 
